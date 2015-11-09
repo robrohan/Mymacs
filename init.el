@@ -70,9 +70,15 @@
   '(add-to-list 'company-backends 'company-go))
 (add-hook 'after-init-hook 'global-company-mode)
 
+(add-to-list 'auto-mode-alist '("\\.html$" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.htm$" . web-mode))
+
+(add-to-list 'auto-mode-alist '("\\.cfml$" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.cfm$" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.cfc$" . csharp-mode))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Tern
-
 (add-to-list 'auto-mode-alist '("\\.json$" . js-mode))
 (add-to-list 'auto-mode-alist '("\\.js$" . js-mode))
 
