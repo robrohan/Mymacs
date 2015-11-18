@@ -56,18 +56,22 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;(setq company-tooltip-limit 20)                      ; bigger popup window
-;(setq company-echo-delay 0)                          ; remove annoying blinking
+;;(setq company-tooltip-limit 20)                      ; bigger popup window
+;;(setq company-echo-delay 0)                          ; remove annoying blinking
 
 ;;(setq company-idle-delay .3)                         ; decrease delay before autocompletion popup shows
 ;;(setq company-begin-commands '(self-insert-command)) ; start autocompletion only after typing
 
-;;(add-hook 'csharp-mode-hook 'omnisharp-mode)
-;;(setq omnisharp-curl-executable-path "/usr/bin/curl")
+(add-hook 'csharp-mode-hook 'omnisharp-mode)
+(setq omnisharp-curl-executable-path "/usr/bin/curl")
+
 (eval-after-load 'company
   '(add-to-list 'company-backends 'company-omnisharp))
+
+(require 'company-emoji)
 (eval-after-load 'company
-  '(add-to-list 'company-backends 'company-go))
+  '(add-to-list 'company-backends 'company-emoji))
+
 (add-hook 'after-init-hook 'global-company-mode)
 
 (add-to-list 'auto-mode-alist '("\\.html$" . web-mode))
@@ -134,7 +138,30 @@
             (setq tab-width 4)
             (setq standard-indent 4)))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(eval-after-load 'company
+  '(add-to-list 'company-backends 'company-go))
+
 (add-hook 'before-save-hook 'gofmt-before-save)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defun --set-emoji-font (frame)
+  "Adjust the font settings of FRAME so Emacs can display emoji properly."
+  (if (eq system-type 'darwin)
+      ;; For NS/Cocoa
+      (set-fontset-font t 'symbol (font-spec :family "Apple Color Emoji") frame 'prepend)
+    ;; For Linux
+    (set-fontset-font t 'symbol (font-spec :family "Symbola") frame 'prepend)))
+
+;; For when Emacs is started in GUI mode:
+(--set-emoji-font nil)
+;; Hook for when a frame is created with emacsclient
+;; see https://www.gnu.org/software/emacs/manual/html_node/elisp/Creating-Frames.html
+(add-hook 'after-make-frame-functions '--set-emoji-font)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -156,7 +183,13 @@
    (quote
     (turn-on-haskell-indent turn-on-haskell-indentation turn-on-haskell-simple-indent)))
  '(menu-bar-mode nil)
+ '(omnisharp-server-executable-path
+   "/Users/robrohan/Projects/OmniSharpServer/OmniSharp/bin/Debug/OmniSharp.exe")
  '(org-agenda-files (quote ("~/Dropbox/todo/org/index.org")))
+ '(package-archives
+   (quote
+    (("melpa" . "https://melpa.org/packages/")
+     ("gnu" . "https://elpa.gnu.org/packages/"))))
  '(size-indication-mode t)
  '(speedbar-show-unknown-files t)
  '(sr-speedbar-right-side nil)
