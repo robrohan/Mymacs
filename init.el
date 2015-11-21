@@ -17,6 +17,9 @@
 
 (menu-bar-mode -1)
 
+(require 'helm-config)
+(helm-mode 1)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (setq load-path (cons "~/bin/geben-0.26" load-path))
 (autoload 'geben "geben" "DBGp protocol frontend, a script debugger" t)
@@ -147,20 +150,20 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(defun --set-emoji-font (frame)
-  "Adjust the font settings of FRAME so Emacs can display emoji properly."
-  (if (eq system-type 'darwin)
-      ;; For NS/Cocoa
-      (set-fontset-font t 'symbol (font-spec :family "Apple Color Emoji") frame 'prepend)
-    ;; For Linux
-    (set-fontset-font t 'symbol (font-spec :family "Symbola") frame 'prepend)))
-
-;; For when Emacs is started in GUI mode:
-(--set-emoji-font nil)
-;; Hook for when a frame is created with emacsclient
-;; see https://www.gnu.org/software/emacs/manual/html_node/elisp/Creating-Frames.html
-(add-hook 'after-make-frame-functions '--set-emoji-font)
-
+;;(defun --set-emoji-font (frame)
+;;  "Adjust the font settings of FRAME so Emacs can display emoji properly."
+;;  (if (eq system-type 'darwin)
+;;      ;; For NS/Cocoa
+;;      (set-fontset-font t 'symbol (font-spec :family "Apple Color Emoji") frame 'prepend)
+;;    ;; For Linux
+;;    (set-fontset-font t 'symbol (font-spec :family "Symbola") frame 'prepend)))
+;;
+;;;; For when Emacs is started in GUI mode:
+;;(--set-emoji-font nil)
+;;;; Hook for when a frame is created with emacsclient
+;;;; see https://www.gnu.org/software/emacs/manual/html_node/elisp/Creating-Frames.html
+;;(add-hook 'after-make-frame-functions '--set-emoji-font)
+;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (custom-set-variables
