@@ -169,6 +169,7 @@
     ("9370aeac615012366188359cb05011aea721c73e1cb194798bc18576025cabeb" default)))
  '(fci-rule-color "#383838")
  '(global-company-mode t)
+ '(line-number-mode t)
  '(menu-bar-mode t)
  '(package-archives
    (quote
@@ -176,7 +177,7 @@
      ("gnu" . "https://elpa.gnu.org/packages/"))))
  '(package-selected-packages
    (quote
-    (go-autocomplete ob-go git-rebase-mode git-commit-mode)))
+    (magit magit-lfs ack go-autocomplete ob-go git-rebase-mode git-commit-mode)))
  '(size-indication-mode t)
  '(speedbar-show-unknown-files t)
  '(sr-speedbar-right-side nil)

@@ -4,6 +4,27 @@
 (load custom-file 'no-error)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(setq inhibit-startup-message t)                    ; Don't show splash
+(fset 'yes-or-no-p 'y-or-n-p)                       ; y/n vs. yes/no
+(global-linum-mode 1)                               ; line numbers
+(setq visual-bell t)                                ; quiet!
+(show-paren-mode t)                                 ; Match parent
+(setq backup-directory-alist                        ;
+      '(("." . "~/.emacs.d/backups")))              ; Move those stupid backup files
+(add-hook 'before-save-hook                         ;
+	  (lambda () (delete-trailing-whitespace))) ; Remove EOL whitespace
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; My Keys
+
+(global-set-key (kbd "C-l")     'goto-line)         ; jump to line number
+(global-set-key (kbd "C-c o")   'occur)             ; like ctrl+s but shows all matches
+(global-set-key (kbd "C-c C-f") 'ack)               ; like grep for the current dir
+       					            ; need to install OSs ack brew, apt-get, etc
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 (require 'helm-config)
 (helm-mode 1)
 
@@ -55,6 +76,8 @@
  '(speedbar-show-unknown-files t)
  '(sr-speedbar-right-side nil)
  '(tool-bar-mode nil)
+ '(line-number-mode t)
+ '(column-number-mode t)
  )
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -64,4 +87,3 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
 )
-
