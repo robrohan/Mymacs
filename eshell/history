@@ -1,0 +1,11 @@
+ls
+cd ..
+ls
+cd ..
+make
+make start
+make start
+make start
+make install deps
+make start
+make start
