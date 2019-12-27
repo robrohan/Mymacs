@@ -154,3 +154,36 @@
 ;;)
 ;;(global-set-key [f5] 'my-php-debug)
 
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(ansi-color-faces-vector
+   [default default default italic underline success warning error])
+ '(blink-cursor-mode nil)
+ '(column-number-mode t)
+ '(custom-enabled-themes (quote (misterioso)))
+ '(custom-safe-themes
+   (quote
+    ("9370aeac615012366188359cb05011aea721c73e1cb194798bc18576025cabeb" default)))
+ '(fci-rule-color "#383838")
+ '(global-company-mode t)
+ '(menu-bar-mode t)
+ '(package-archives
+   (quote
+    (("melpa" . "https://melpa.org/packages/")
+     ("gnu" . "https://elpa.gnu.org/packages/"))))
+ '(package-selected-packages
+   (quote
+    (go-autocomplete ob-go git-rebase-mode git-commit-mode)))
+ '(size-indication-mode t)
+ '(speedbar-show-unknown-files t)
+ '(sr-speedbar-right-side nil)
+ '(tool-bar-mode nil))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )

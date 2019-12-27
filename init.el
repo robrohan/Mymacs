@@ -51,9 +51,6 @@
    (quote
     (("melpa" . "https://melpa.org/packages/")
      ("gnu" . "https://elpa.gnu.org/packages/"))))
- '(package-selected-packages
-   (quote
-    (go-autocomplete gnuplot-mode ob-go git-rebase-mode git-commit-mode)))
  '(size-indication-mode t)
  '(speedbar-show-unknown-files t)
  '(sr-speedbar-right-side nil)
