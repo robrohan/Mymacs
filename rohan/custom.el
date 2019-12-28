@@ -14,6 +14,9 @@
 (setq lsp-gopls-staticcheck t)
 (setq lsp-eldoc-render-all t)
 (setq lsp-gopls-complete-unimported t)
+(setq lsp-ui-doc-enable nil)
+(setq lsp-ui-imenu nil)
+(setq lsp-ui-peek-enable nil)
 
 (use-package lsp-mode
   :ensure t
@@ -39,9 +42,9 @@
             ;; don't add any dely before trying to complete thing being typed
             ;; the call/response to gopls is asynchronous so this should have little
             ;; to no affect on edit latency
-            (setq company-idle-delay 0)
+            (setq company-idle-delay .3)
             ;; start completing after a single character instead of 3
-            (setq company-minimum-prefix-length 1)
+            (setq company-minimum-prefix-length 2)
             ;; align fields in completions
             (setq company-tooltip-align-annotations t)
             )
@@ -58,11 +61,11 @@
   ;; (set (make-local-variable 'company-backends) '(company-go))
   ;; (company-mode)
   (local-set-key (kbd "C-c m") 'gofmt)
-  (local-set-key (kbd "M-*") 'pop-tag-mark)
-  (local-set-key (kbd "M-.") 'godef-jump))
+  ;; (local-set-key (kbd "M-*") 'pop-tag-mark)
+  ;; (local-set-key (kbd "M-.") 'godef-jump))
+  )
 
 (add-hook 'go-mode-hook 'rohan-go-mode-hook)
-
 
 (use-package go-mode
   :ensure t
