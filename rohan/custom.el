@@ -1,32 +1,80 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Golang
+;; go get golang.org/x/tools/cmd/goimports
+;; go get golang.org/x/tools/cmd/gofmt
+;; go get github.com/rogpeppe/godef
+;; go get -u github.com/nsf/gocode
+
+;; Note: _can not_ use ~ :-/
+(setenv "GOPATH" "/Users/robrohan/Projects/go")
+
 (require 'speedbar)
 (speedbar-add-supported-extension ".go")
 
-(add-hook 'go-mode-hook
-          (lambda ()
-            (setq-default)
-            (setq tab-width 4)
-            (setq standard-indent 4)))
+(setq lsp-gopls-staticcheck t)
+(setq lsp-eldoc-render-all t)
+(setq lsp-gopls-complete-unimported t)
 
-(eval-after-load 'company
-   '(add-to-list 'company-backends 'company-go))
+(use-package lsp-mode
+  :ensure t
+  ;; uncomment to enable gopls http debug server
+  ; :custom (lsp-gopls-server-args '("-debug" "127.0.0.1:0"))
+  :commands (lsp lsp-deferred)
+  :config (progn
+            ;; use flycheck, not flymake
+            (setq lsp-prefer-flymake nil)))
 
-(add-hook 'before-save-hook 'gofmt-before-save)
+(use-package lsp-ui
+   :ensure t
+   :commands lsp-ui-mode
+   :init
+   )
+
+(use-package flycheck
+  :ensure t)
+
+(use-package company
+  :ensure t
+  :config (progn
+            ;; don't add any dely before trying to complete thing being typed
+            ;; the call/response to gopls is asynchronous so this should have little
+            ;; to no affect on edit latency
+            (setq company-idle-delay 0)
+            ;; start completing after a single character instead of 3
+            (setq company-minimum-prefix-length 1)
+            ;; align fields in completions
+            (setq company-tooltip-align-annotations t)
+            )
+)
+
+(use-package company-lsp
+  :ensure t
+  :commands company-lsp)
+
+(defun rohan-go-mode-hook ()
+  (setq-default)
+  (setq tab-width 2)
+  (setq standard-indent 2)
+  ;; (set (make-local-variable 'company-backends) '(company-go))
+  ;; (company-mode)
+  (local-set-key (kbd "C-c m") 'gofmt)
+  (local-set-key (kbd "M-*") 'pop-tag-mark)
+  (local-set-key (kbd "M-.") 'godef-jump))
+
+(add-hook 'go-mode-hook 'rohan-go-mode-hook)
 
 
-(require 'company-go)
-(add-hook 'after-init-hook 'global-company-mode)
-
-;; (require 'go-mode-autoloads)
-(add-hook 'go-mode-hook 'company-mode)
-(add-hook 'go-mode-hook (lambda ()
-                            (set (make-local-variable 'company-backends) '(company-go))
-                            (company-mode)))
-;; (add-hook 'go-mode-hook (lambda ()
-;;                            (local-set-key (kbd \"M-.\") 'godef-jump)))
-(setq gofmt-command "goimports")
-(add-hook 'before-save-hook 'gofmt-before-save)
+(use-package go-mode
+  :ensure t
+  :bind (
+         ;; If you want to switch existing go-mode bindings to use lsp-mode/gopls instead
+         ;; uncomment the following lines
+         ("C-c C-j" . lsp-find-definition)
+         ("C-c C-d" . lsp-describe-thing-at-point)
+         )
+  :hook ((go-mode . lsp-deferred)
+         (before-save . lsp-format-buffer)
+         (before-save . lsp-organize-imports)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Javascript
@@ -124,16 +172,16 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; C#
 
-(require 'speedbar)
-(speedbar-add-supported-extension ".cs")
+;; (require 'speedbar)
+;; (speedbar-add-supported-extension ".cs")
 
-(add-hook 'csharp-mode-hook 'omnisharp-mode)
-(setq omnisharp-curl-executable-path "/usr/bin/curl")
-(setq omnisharp-server-executable-path
-   "/Users/robrohan/Projects/OmniSharpServer/OmniSharp/bin/Debug/OmniSharp.exe")
+;; (add-hook 'csharp-mode-hook 'omnisharp-mode)
+;; (setq omnisharp-curl-executable-path "/usr/bin/curl")
+;; (setq omnisharp-server-executable-path
+;;    "/Users/robrohan/Projects/OmniSharpServer/OmniSharp/bin/Debug/OmniSharp.exe")
 
-(eval-after-load 'company
-  '(add-to-list 'company-backends 'company-omnisharp))
+;; (eval-after-load 'company
+;;   '(add-to-list 'company-backends 'company-omnisharp))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -177,7 +225,7 @@
      ("gnu" . "https://elpa.gnu.org/packages/"))))
  '(package-selected-packages
    (quote
-    (magit magit-lfs ack go-autocomplete ob-go git-rebase-mode git-commit-mode)))
+    (lsp-ui flymake flymake-go company-go helm-company go-mode helm flycheck use-package company-lsp lsp-mode auto-complete-rst magit magit-lfs ack go-autocomplete ob-go git-rebase-mode git-commit-mode)))
  '(size-indication-mode t)
  '(speedbar-show-unknown-files t)
  '(sr-speedbar-right-side nil)

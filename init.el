@@ -22,10 +22,11 @@
 (global-set-key (kbd "C-c o")   'occur)             ; like ctrl+s but shows all matches
 (global-set-key (kbd "C-c C-f") 'ack)               ; like grep for the current dir
        					            ; need to install OSs ack brew, apt-get, etc
-
+(global-set-key (kbd "s-;") 'comment-region)
+(global-set-key (kbd "C-c s-;") 'uncomment-region)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(require 'helm-config)
+;; (require 'helm-config)
 (helm-mode 1)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -43,6 +44,7 @@
 (setq company-echo-delay 0)                          ; remove annoying blinking
 (setq company-idle-delay .3)                         ; decrease delay before autocompletion popup shows
 (setq company-begin-commands '(self-insert-command)) ; start autocompletion only after typing
+;; (setq company-minimum-prefix-length 1)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
