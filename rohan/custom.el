@@ -58,11 +58,7 @@
   (setq-default)
   (setq tab-width 2)
   (setq standard-indent 2)
-  ;; (set (make-local-variable 'company-backends) '(company-go))
-  ;; (company-mode)
   (local-set-key (kbd "C-c m") 'gofmt)
-  ;; (local-set-key (kbd "M-*") 'pop-tag-mark)
-  ;; (local-set-key (kbd "M-.") 'godef-jump))
   )
 
 (add-hook 'go-mode-hook 'rohan-go-mode-hook)
