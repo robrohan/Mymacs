@@ -1,4 +1,10 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; C
+;; brew install llvm (to get clangd) (apt-get install clangd) for c-lsp
+;; See lsp-mode below
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Golang
 ;; go get golang.org/x/tools/cmd/goimports
 ;; go get golang.org/x/tools/cmd/gofmt
@@ -25,7 +31,10 @@
   :commands (lsp lsp-deferred)
   :config (progn
             ;; use flycheck, not flymake
-            (setq lsp-prefer-flymake nil)))
+            (setq lsp-prefer-flymake nil))
+  :hook (
+	  (go-mode c-mode typescript-mode web-mod) . lsp)
+  )
 
 (use-package lsp-ui
    :ensure t

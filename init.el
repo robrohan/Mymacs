@@ -47,9 +47,12 @@
 ;; (setq company-minimum-prefix-length 1)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Need golang stuff and llvm stuff for C
 
-(setenv "PATH" (concat (getenv "PATH") ":~/Projects/go/bin/:/usr/local/go/bin:/usr/local/bin"))
-(setq exec-path (append exec-path '(":~/Projects/go/bin/:/usr/local/go/bin:/usr/local/bin")))
+(setenv "PATH" (concat (getenv "PATH")
+		       "~/Projects/go/bin/:/usr/local/go/bin:/usr/local/bin:/usr/local/Cellar/llvm/9.0.0_1/bin"))
+(setq exec-path (append exec-path
+			'("~/Projects/go/bin/:/usr/local/go/bin:/usr/local/bin:/usr/local/Cellar/llvm/9.0.0_1/bin")))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Theme stuff
