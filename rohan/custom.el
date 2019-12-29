@@ -233,7 +233,7 @@
      ("gnu" . "https://elpa.gnu.org/packages/"))))
  '(package-selected-packages
    (quote
-    (lsp-ui flymake flymake-go company-go helm-company go-mode helm flycheck use-package company-lsp lsp-mode auto-complete-rst magit magit-lfs ack go-autocomplete ob-go git-rebase-mode git-commit-mode)))
+    (auto-dim-other-buffers lsp-ui flymake flymake-go company-go helm-company go-mode helm flycheck use-package company-lsp lsp-mode auto-complete-rst magit magit-lfs ack go-autocomplete ob-go git-rebase-mode git-commit-mode)))
  '(size-indication-mode t)
  '(speedbar-show-unknown-files t)
  '(sr-speedbar-right-side nil)

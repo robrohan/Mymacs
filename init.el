@@ -8,12 +8,28 @@
 (fset 'yes-or-no-p 'y-or-n-p)                       ; y/n vs. yes/no
 (global-linum-mode 1)                               ; line numbers
 (setq visual-bell t)                                ; quiet!
+(setq ring-bell-function 'ignore)                   ; Really, shut up.
+(global-hl-line-mode 1)
 (show-paren-mode t)                                 ; Match parent
 (setq backup-directory-alist                        ;
       '(("." . "~/.emacs.d/backups")))              ; Move those stupid backup files
 (add-hook 'before-save-hook                         ;
 	  (lambda () (delete-trailing-whitespace))) ; Remove EOL whitespace
 
+(set-face-attribute 'mode-line                      ; Change the bar of the active window
+                 nil
+                 :foreground "gray80"
+                 :background "gray25"
+                 :box '(:line-width 1 :style released-button))
+(set-face-attribute 'mode-line-inactive             ; Change the bar of the inactive window
+                 nil
+                 :foreground "gray25"
+                 :background "black"
+                 :box '(:line-width 1 :style released-button))
+
+(add-hook 'after-init-hook (lambda ()               ; Try to dim the non-active window
+  (when (fboundp 'auto-dim-other-buffers-mode)
+    (auto-dim-other-buffers-mode t))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; My Keys
