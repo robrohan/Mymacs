@@ -36,14 +36,16 @@
 
 (global-set-key (kbd "C-l")     'goto-line)         ; jump to line number
 (global-set-key (kbd "C-c o")   'occur)             ; like ctrl+s but shows all matches
-(global-set-key (kbd "C-c C-f") 'ack)               ; like grep for the current dir
+; (global-set-key (kbd "C-c C-f") 'ack)               ; like grep for the current dir
        					            ; need to install OSs ack brew, apt-get, etc
 (global-set-key (kbd "s-;") 'comment-region)
 (global-set-key (kbd "C-c s-;") 'uncomment-region)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; (require 'helm-config)
+(require 'helm)
 (helm-mode 1)
+(global-set-key (kbd "M-x") 'helm-M-x)
+(global-set-key (kbd "C-x C-f") 'helm-find)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Assign some modes to file extensions
@@ -66,9 +68,9 @@
 ;; Need golang stuff and llvm stuff for C
 
 (setenv "PATH" (concat (getenv "PATH")
-		       "~/Projects/go/bin/:/usr/local/go/bin:/usr/local/bin:/usr/local/Cellar/llvm/9.0.0_1/bin"))
+		       "~/Projects/go/bin/:/usr/local/go/bin:/usr/local/bin:/usr/local/Cellar/llvm/9.0.0_1/bin:/usr/bin"))
 (setq exec-path (append exec-path
-			'("~/Projects/go/bin/:/usr/local/go/bin:/usr/local/bin:/usr/local/Cellar/llvm/9.0.0_1/bin")))
+			'("~/Projects/go/bin/:/usr/local/go/bin:/usr/local/bin:/usr/local/Cellar/llvm/9.0.0_1/bin:/usr/bin")))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Theme stuff
